@@ -49,7 +49,7 @@ An intelligent lesson plan generator built with React, TypeScript, and Google's 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ai-lesson-plan-generator.git
+git clone https://github.com/StackSamuraiK/ai-lesson-plan-generator
 cd ai-lesson-plan-generator
 ```
 
