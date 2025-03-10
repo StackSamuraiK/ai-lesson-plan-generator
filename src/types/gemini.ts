@@ -13,7 +13,7 @@ export async function generateLessonPlan(prompt: LessonPlan): Promise<string> {
 
   try {
     const model: GenerativeModel = genAI.getGenerativeModel({ 
-      model: 'gemini-pro',
+      model: 'gemini-2.0-flash',
       generationConfig: {
         temperature: 0.7,
         topK: 40,
