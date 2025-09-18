@@ -9,7 +9,7 @@ import type { LessonPlan } from '@/types';
 import { generateLessonPlan } from '../types/gemini'; 
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-import { Loader2 } from 'lucide-react';
+import { Loader2, BookOpen, GraduationCap, Target, Package, FileText, Clock } from 'lucide-react';
 
 export default function LessonPlanForm() {
   const [lessonPlan, setLessonPlan] = useState<LessonPlan>({
@@ -162,117 +162,156 @@ export default function LessonPlanForm() {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Create Lesson Plan</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-2">
-              <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Topic
-              </label>
-              <Input
-                name="topic"
-                value={lessonPlan.topic}
-                onChange={handleChange}
-                placeholder="Enter lesson topic"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Grade Level
-              </label>
-              <Input
-                name="gradeLevel"
-                value={lessonPlan.gradeLevel}
-                onChange={handleChange}
-                placeholder="Enter grade level"
-                required
-              />
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 p-4 md:p-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl mb-4 shadow-lg dark:shadow-black/30">
+            <BookOpen className="w-8 h-8 text-white" />
           </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent mb-2">
+            Lesson Plan Creator
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 text-lg">Design engaging educational experiences with ease</p>
+        </div>
 
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="details">
-              <AccordionTrigger className="text-left">Lesson Details</AccordionTrigger>
-              <AccordionContent>
-                <div className="space-y-4 pt-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      Main Concept
-                    </label>
-                    <Textarea
-                      name="mainConcept"
-                      value={lessonPlan.mainConcept}
-                      onChange={handleChange}
-                      placeholder="Enter main concept and subtopics"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      Materials Needed
-                    </label>
-                    <Textarea
-                      name="materials"
-                      value={lessonPlan.materials}
-                      onChange={handleChange}
-                      placeholder="List required materials"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      Learning Objectives
-                    </label>
-                    <Textarea
-                      name="objectives"
-                      value={lessonPlan.objectives}
-                      onChange={handleChange}
-                      placeholder="Enter learning objectives"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      Lesson Outline
-                    </label>
-                    <Textarea
-                      name="outline"
-                      value={lessonPlan.outline}
-                      onChange={handleChange}
-                      placeholder="Enter lesson outline"
-                      required
-                    />
-                  </div>
+        <Card className="backdrop-blur-sm bg-white/70 dark:bg-slate-900/70 border-0 shadow-xl shadow-slate-200/50 dark:shadow-black/30">
+          <div className="p-8">
+            <div className="space-y-8">
+              {/* Essential Information */}
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="group">
+                  <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                    <BookOpen className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+                    Topic
+                  </label>
+                  <Input
+                    name="topic"
+                    value={lessonPlan.topic}
+                    onChange={handleChange}
+                    placeholder="Enter lesson topic"
+                    required
+                    className="h-12 border-slate-200 dark:border-slate-600 focus:border-indigo-300 dark:focus:border-indigo-400 focus:ring-indigo-100 dark:focus:ring-indigo-900 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                  />
                 </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
 
-          <div className="flex gap-4">
-            <Button 
-              type="submit" 
-              className="w-full"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Generating Plan...
-                </>
-              ) : (
-                'Create Lesson Plan'
-              )}
-            </Button>
+                <div className="group">
+                  <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                    <GraduationCap className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+                    Grade Level
+                  </label>
+                  <Input
+                    name="gradeLevel"
+                    value={lessonPlan.gradeLevel}
+                    onChange={handleChange}
+                    placeholder="Enter grade level"
+                    required
+                    className="h-12 border-slate-200 dark:border-slate-600 focus:border-indigo-300 dark:focus:border-indigo-400 focus:ring-indigo-100 dark:focus:ring-indigo-900 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                  />
+                </div>
+              </div>
+
+              {/* Detailed Planning Section */}
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="details" className="border border-slate-200 dark:border-slate-700 rounded-xl px-1 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+                  <AccordionTrigger className="px-6 py-4 text-left hover:no-underline group">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 rounded-lg group-hover:from-indigo-200 group-hover:to-purple-200 dark:group-hover:from-indigo-800 dark:group-hover:to-purple-800 transition-all duration-200">
+                        <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                      </div>
+                      <span className="font-semibold text-slate-700 dark:text-slate-300">Lesson Details</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="px-6 pb-6 space-y-6">
+                      <div className="group">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                          <Target className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
+                          Main Concept
+                        </label>
+                        <Textarea
+                          name="mainConcept"
+                          value={lessonPlan.mainConcept}
+                          onChange={handleChange}
+                          placeholder="Describe the core concept and key subtopics students will explore"
+                          required
+                          className="min-h-[100px] border-slate-200 dark:border-slate-600 focus:border-emerald-300 dark:focus:border-emerald-400 focus:ring-emerald-100 dark:focus:ring-emerald-900 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 resize-none"
+                        />
+                      </div>
+
+                      <div className="group">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                          <Package className="w-4 h-4 text-amber-500 dark:text-amber-400" />
+                          Materials Needed
+                        </label>
+                        <Textarea
+                          name="materials"
+                          value={lessonPlan.materials}
+                          onChange={handleChange}
+                          placeholder="List all resources, supplies, and materials required for this lesson"
+                          required
+                          className="min-h-[100px] border-slate-200 dark:border-slate-600 focus:border-amber-300 dark:focus:border-amber-400 focus:ring-amber-100 dark:focus:ring-amber-900 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 resize-none"
+                        />
+                      </div>
+
+                      <div className="group">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                          <Target className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                          Learning Objectives
+                        </label>
+                        <Textarea
+                          name="objectives"
+                          value={lessonPlan.objectives}
+                          onChange={handleChange}
+                          placeholder="Define what students will be able to do by the end of this lesson"
+                          required
+                          className="min-h-[100px] border-slate-200 dark:border-slate-600 focus:border-blue-300 dark:focus:border-blue-400 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 resize-none"
+                        />
+                      </div>
+
+                      <div className="group">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+                          <Clock className="w-4 h-4 text-purple-500 dark:text-purple-400" />
+                          Lesson Outline
+                        </label>
+                        <Textarea
+                          name="outline"
+                          value={lessonPlan.outline}
+                          onChange={handleChange}
+                          placeholder="Outline the lesson structure, activities, and timeline"
+                          required
+                          className="min-h-[120px] border-slate-200 dark:border-slate-600 focus:border-purple-300 dark:focus:border-purple-400 focus:ring-purple-100 dark:focus:ring-purple-900 transition-all duration-200 bg-white/80 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 resize-none"
+                        />
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+
+              {/* Submit Button */}
+              <div className="pt-4">
+                <Button 
+                  onClick={handleSubmit}
+                  className="w-full h-14 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 dark:from-indigo-500 dark:to-purple-500 dark:hover:from-indigo-600 dark:hover:to-purple-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-200 dark:shadow-indigo-900/30 hover:shadow-xl hover:shadow-indigo-300 dark:hover:shadow-indigo-800/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                      <span>Generating Your Lesson Plan...</span>
+                    </>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <BookOpen className="w-5 h-5" />
+                      Create Lesson Plan
+                    </span>
+                  )}
+                </Button>
+              </div>
+            </div>
           </div>
-        </form>
+        </Card>
       </div>
-    </Card>
+    </div>
   );
 }
